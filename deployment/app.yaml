@@ -1,0 +1,4 @@
+# deployment/app.yaml
+runtime: python39
+entrypoint: gunicorn -b :$PORT backend.app:app
+instance_class: F2
