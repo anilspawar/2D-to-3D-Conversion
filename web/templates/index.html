@@ -1,0 +1,25 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Model Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <h1>3D Model Viewer</h1>
+    <canvas id="canvas"></canvas>
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("canvas") });
+        renderer.setSize(window.innnerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        var loader = new THREE.ObjectLoader();
+        loader.load("path/to/your/model.json", function(obj) {
+            scene.add(obj);
+            renderer.render(scene, camera);
+        });
+    </script>
+</body>
+</html>
