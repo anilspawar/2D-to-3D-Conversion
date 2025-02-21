@@ -1,0 +1,8 @@
+# deployment/clouldbuild.yaml
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/2d-to-3d', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    agrs: ['push', 'gcr.io/$PROJECT_ID/2d-to-3d']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    agrs: ['run', 'deploy', '2d-to-3d', '--image', 'gcr.io/$PROJECT_ID/2d-to-3d', '--platform', 'managed']
