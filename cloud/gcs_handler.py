@@ -1,11 +1,11 @@
 # cloud/gcs_handler.py
 from google.cloud import storage
 
-def upload_file_to_gcs(bucket_name, source_file_name, destination_blob_name):
-    """Uploads a file to Google Storage."""
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(destination_blob_name)
+client = stoarge.Client()
+bucket_name = "my-2d-to-3d"
 
-    blob.upload_from_filename(source_file_name)
-    print(f"File {source_file_name} uploaded to {destination_blob_name}.")
+def upload_file(file_path):
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(file_path.split("/")[-1])
+    blob.upload_from_filename(file_path)
+    return f"gs://{bucket_name}/{blob.name}"
